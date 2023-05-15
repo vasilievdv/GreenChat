@@ -31,5 +31,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'react/jsx-no-useless-fragment': 0,
     'import/export': 0,
+    'no-restricted-exports': 0,
   },
 };

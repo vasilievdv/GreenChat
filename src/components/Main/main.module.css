@@ -1,0 +1,6 @@
+.chatCard {
+  position: absolute;
+  inset: 40px;
+  background: hsl(0, 0%, 13%);
+  color: azure;
+}
