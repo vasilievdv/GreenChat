@@ -22,7 +22,10 @@ function UserControlPanel(props) {
     event.preventDefault();
     const currentPhoneNumber = idRef.current.value;
     setContactList([...contactList, currentPhoneNumber]);
-    dispatch(requestDataAC(clearPhone(currentPhoneNumber)));
+    const id = clearPhone(currentPhoneNumber);
+    const token = tokenRef.current.value;
+    const instance = instanceRef.current.value;
+    dispatch(requestDataAC({ instance, token, chatId: id }));
     contactRef.current.reset();
   };
 
