@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { sendMessageThunk } from './thunks';
+import { clearNotificationQueue } from '../../utilities';
 import styles from './chat.module.css';
 
 function Chat(props) {
@@ -9,6 +10,12 @@ function Chat(props) {
   const messageRef = useRef('');
   const messageInputRef = useRef(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (requestData.length) {
+      clearNotificationQueue(requestData[0]);
+    }
+  }, [requestData]);
 
   const onSubmitMessageForm = (event) => {
     event.preventDefault();
