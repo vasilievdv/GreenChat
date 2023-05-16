@@ -1,0 +1,9 @@
+.chat {
+  height: 100%;
+  background: hsl(210, 9%, 25%);
+}
+
+.message {
+ position: absolute;
+ bottom: 0;
+}

@@ -2,11 +2,13 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import styles from './interlocutorCard.module.css';
 
-function InterlocutorCard(props) {
+function InterlocutorCard({ contactId }) {
   return (
-    <Card className={styles.card}>
-      <Card.Title>+7(999)111-11-11</Card.Title>
-    </Card>
+    <a href="#">
+      <Card className={styles.card}>
+        <Card.Title>{contactId}</Card.Title>
+      </Card>
+    </a>
   );
 }
 

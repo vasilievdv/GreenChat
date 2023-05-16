@@ -2,6 +2,14 @@
   margin: 0.2rem;
 }
 
-.chatInput {
+.contact {
   margin-top: -12px;
 }
+
+/* .formControl {
+   background: hsl(210, 9%, 10%);
+   border: solid hsl(0, 0%, 21%);
+}
+.formControl::placeholder {
+  color: rgb(141, 141, 141);
+} */

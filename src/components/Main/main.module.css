@@ -1,6 +1,11 @@
-.chatCard {
+.mainCard {
   position: absolute;
   inset: 40px;
-  background: hsl(0, 0%, 13%);
+  background: hsl(210, 9%, 10%);
   color: azure;
+  padding: 0 8px;
+}
+
+.row {
+  height: 100%;
 }

@@ -32,5 +32,6 @@ module.exports = {
     'react/jsx-no-useless-fragment': 0,
     'import/export': 0,
     'no-restricted-exports': 0,
+    'import/prefer-default-export': 0,
   },
 };
