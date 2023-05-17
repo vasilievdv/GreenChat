@@ -7,7 +7,6 @@ export async function clearNotificationQueue(requestData) {
     while (!receive || receive.data) {
       // eslint-disable-next-line no-await-in-loop
       receive = await receiveNotification(requestData);
-      console.log(receive.data);
       if (receive.data) {
         const { receiptId } = receive.data;
         // eslint-disable-next-line no-await-in-loop

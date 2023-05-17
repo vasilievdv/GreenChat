@@ -1,12 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { sendMessageThunk } from './thunks';
-import { clearNotificationQueue } from '../../utilities';
+import { clearNotificationQueue, outMessageMenager } from '../../utilities';
 import styles from './chat.module.css';
 
 function Chat(props) {
   const requestData = useSelector((state) => state.requestData);
+  const [chat, setChat] = useState([]);
   const messageRef = useRef('');
   const messageInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ function Chat(props) {
     const id = `${chatId}@c.us`;
     const requestPayload = { instance, token, message: { chatId: id, message } };
     dispatch(sendMessageThunk(requestPayload));
+    const updatedChats = outMessageMenager(chatId, message, chat);
+    setChat(updatedChats);
     messageInputRef.current.reset();
   };
 
