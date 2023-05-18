@@ -10,7 +10,6 @@ export async function handleNotification(requestData) {
         sender: body.senderData.sender.slice(0, 11),
         message: body.messageData.textMessageData.textMessage,
       };
-      console.log(incomingMessage);
       await deleteNotification(requestData, receiptId);
     }
   } catch (error) {

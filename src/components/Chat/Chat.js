@@ -29,7 +29,9 @@ function Chat(props) {
     const currentMessage = messageRef.current.value;
     const { instance, token, chatId } = requestData[0];
     const id = `${chatId}@c.us`;
-    const message = { chatId: id, message: currentMessage };
+    const message = {
+      chatId: id, message: currentMessage,
+    };
     const requestPayload = { instance, token, message };
     dispatch(sendMessageThunk(requestPayload));
     const updatedChats = messageManager(chatId, message, chat);
@@ -38,8 +40,19 @@ function Chat(props) {
   };
 
   return (
-    <Card className={styles.chat}>
-      {chat[0]?.messages.map((el, id) => <Badge pill bg="light" text="dark" className={styles.messageBadge} key={id}>{el.message}</Badge>)}
+    <>
+      <Card className={styles.chat}>
+        {chat[0]?.messages
+          .map((el) => (
+            <div
+              key={el.chatId}
+              className={el.chatId
+                ? styles.msgBox
+                : `${styles.msgBox} ${styles.inMsg}`}
+            >{el.message}
+            </div>
+          ))}
+      </Card>
       <Form onSubmit={onSubmitMessageForm} ref={messageInputRef}>
         <Form.Control
           type="message"
@@ -49,7 +62,7 @@ function Chat(props) {
           ref={messageRef}
         />
       </Form>
-    </Card>
+    </>
   );
 }
 

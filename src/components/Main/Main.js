@@ -8,8 +8,8 @@ function Main(props) {
   return (
     <Card className={styles.mainCard}>
       <Row className={styles.row}>
-        <Col><UserControlPanel /></Col>
-        <Col><Chat /></Col>
+        <Col className={styles.row}><UserControlPanel /></Col>
+        <Col className={styles.row}><Chat /></Col>
       </Row>
     </Card>
   );

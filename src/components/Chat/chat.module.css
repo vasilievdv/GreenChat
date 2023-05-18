@@ -1,14 +1,31 @@
 .chat {
-  height: 100%;
+  overflow-x: scroll;
+  height: inherit;
   background: hsl(210, 9%, 25%);
 }
 
 .messageInput {
- position: absolute;
- bottom: 0;
+ position: sticky;
+ margin-top: -30px;
+ opacity: 0.96;
 }
 
-.messageBadge {
+.msgBox {
+  padding: 0px 10px 0 10px;
+  margin-bottom: 0.5rem;
+  max-width: 80%;
   width: fit-content;
-  margin: 0.2rem;
+  inline-size: 250px;
+  overflow-wrap: break-word;
+  background: #5b5e6c;
+  border-radius: 6px 6px 6px 0;
+  box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
+
+.inMsg {
+ margin-left: auto;
+ border-radius: 6px 6px 0 6px;
+ background: rgb(33, 134, 86);
+ float: right;
+}
+  
