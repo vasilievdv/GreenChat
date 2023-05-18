@@ -1,16 +1,21 @@
 import { receiveNotification, deleteNotification } from '../requests';
 
-export async function clearNotificationQueue(requestData) {
+export async function clearNotificationQueue(requestData, manager, chats, set) {
+  let received;
   try {
-    let receive;
-    // eslint-disable-next-line no-cond-assign, no-await-in-loop
-    while (!receive || receive.data) {
-      // eslint-disable-next-line no-await-in-loop
-      receive = await receiveNotification(requestData);
-      if (receive.data) {
-        const { receiptId } = receive.data;
-        // eslint-disable-next-line no-await-in-loop
-        const del = await deleteNotification(requestData, receiptId);
+    while (!received || received.data) {
+      received = await receiveNotification(requestData);
+      if (received.data) {
+        const { receiptId, body } = received.data;
+        const incomingMessage = {
+          sender: body?.senderData?.sender.slice(0, 11),
+          message: body?.messageData?.textMessageData?.textMessage,
+        };
+        if (manager) {
+          const updatedChats = manager(incomingMessage.sender, incomingMessage, chats);
+          set(updatedChats);
+        }
+        await deleteNotification(requestData, receiptId);
       }
     }
   } catch (error) {

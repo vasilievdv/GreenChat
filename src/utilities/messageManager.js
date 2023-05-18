@@ -1,9 +1,7 @@
-export function outMessageMenager(currentChatId, currentMessage, wholeChat) {
-  let operatingChats = [];
-  const updatedChat = [];
+export function messageManager(currentChatId, currentMessage, wholeChat) {
+  const operatingChats = [...wholeChat];
   const newChat = { chatId: currentChatId, messages: [currentMessage] };
   if (wholeChat.length) {
-    operatingChats = [...wholeChat];
     const findChatId = operatingChats
       .findIndex((element) => element.chatId === currentChatId);
     if (findChatId >= 0) {

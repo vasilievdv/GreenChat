@@ -33,5 +33,6 @@ module.exports = {
     'import/export': 0,
     'no-restricted-exports': 0,
     'import/prefer-default-export': 0,
+    'no-await-in-loop': 0,
   },
 };

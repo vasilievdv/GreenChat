@@ -3,7 +3,12 @@
   background: hsl(210, 9%, 25%);
 }
 
-.message {
+.messageInput {
  position: absolute;
  bottom: 0;
+}
+
+.messageBadge {
+  width: fit-content;
+  margin: 0.2rem;
 }

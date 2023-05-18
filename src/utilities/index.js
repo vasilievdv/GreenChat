@@ -1,3 +1,4 @@
 export * from './clearPhone';
 export * from './clearNotificationQueue';
-export * from './outMessageMenager';
+export * from './messageManager';
+export * from './handleNotification';

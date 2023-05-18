@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card, Form, Badge } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { sendMessageThunk } from './thunks';
-import { clearNotificationQueue, outMessageMenager } from '../../utilities';
+import { clearNotificationQueue, messageManager } from '../../utilities';
 import styles from './chat.module.css';
 
 function Chat(props) {
@@ -13,31 +13,39 @@ function Chat(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let refreshInterval = null;
     if (requestData.length) {
-      clearNotificationQueue(requestData[0]);
+      refreshInterval = setInterval(() => {
+        clearNotificationQueue(requestData[0], messageManager, chat, setChat);
+      }, 5000);
     }
-  }, [requestData]);
+    return () => {
+      clearInterval(refreshInterval);
+    };
+  }, [requestData, chat]);
 
   const onSubmitMessageForm = (event) => {
     event.preventDefault();
-    const message = messageRef.current.value;
+    const currentMessage = messageRef.current.value;
     const { instance, token, chatId } = requestData[0];
     const id = `${chatId}@c.us`;
-    const requestPayload = { instance, token, message: { chatId: id, message } };
+    const message = { chatId: id, message: currentMessage };
+    const requestPayload = { instance, token, message };
     dispatch(sendMessageThunk(requestPayload));
-    const updatedChats = outMessageMenager(chatId, message, chat);
+    const updatedChats = messageManager(chatId, message, chat);
     setChat(updatedChats);
     messageInputRef.current.reset();
   };
 
   return (
     <Card className={styles.chat}>
+      {chat[0]?.messages.map((el, id) => <Badge pill bg="light" text="dark" className={styles.messageBadge} key={id}>{el.message}</Badge>)}
       <Form onSubmit={onSubmitMessageForm} ref={messageInputRef}>
         <Form.Control
           type="message"
           placeholder="Enter a message"
           size="sm"
-          className={styles.message}
+          className={styles.messageInput}
           ref={messageRef}
         />
       </Form>
